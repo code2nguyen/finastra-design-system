@@ -66,7 +66,7 @@ export class VectorMapComponent implements OnInit, OnChanges {
   } */
 
   emitterData(e) {
-    const clickCountryIndexs = e.data[0].selectedpoints || [];
+    const clickCountryIndexs = e.points[0].data.selectedpoints || [];
     const selectData = [];
     for (let i = 0; i < clickCountryIndexs.length; i++) {
       selectData.push(this.data[clickCountryIndexs[i]]);
@@ -82,6 +82,7 @@ export class VectorMapComponent implements OnInit, OnChanges {
     this.graph = {
       data: [
         {
+          hoverinfo:'text',
           type: 'choropleth',
           locationmode: this.countryNameType !== undefined? this.countryNameType : this._countryNameType,
           locations: this.data.map(dataItem => dataItem.country), 
@@ -95,7 +96,7 @@ export class VectorMapComponent implements OnInit, OnChanges {
           }), 
           colorbar: { title: { text: this.colorbarTitle ?
             this.colorbarTitle: 
-            this._colorbarTitle } },
+            this._colorbarTitle },x:0.8,xanchor:'center'},
           colorscale: [[0, this.colorbarColorMin ? 
             this.colorbarColorMin:
             this._colorbarColorMin], 
@@ -147,7 +148,7 @@ export class VectorMapComponent implements OnInit, OnChanges {
               this._centerPos[0]  
           },
           projection: {
-            scale: 2,
+            scale: 1.5,
             type: 'mercator'
           }
         }

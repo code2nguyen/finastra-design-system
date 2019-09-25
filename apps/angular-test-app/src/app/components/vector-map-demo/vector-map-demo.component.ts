@@ -12,15 +12,20 @@ export class VectorMapDemoComponent implements OnInit  {
       country: 'France',
       value: 10,
       'Market Value': 666,
-      currency: 'EUR'
+      currency: 'EUR',
+      text: 'hello world'
     },
     {
       country: 'CHN',
-      value: 25
+      value: 25,
+      currency: 'YEN',
+      text:'welcome'
     },
     {
       country: 'Portugal',
-      value: 150
+      value: 150,
+      currency: 'EUR',
+      text:'lorem'
     },
     {
       country: 'USA',
@@ -29,7 +34,7 @@ export class VectorMapDemoComponent implements OnInit  {
       text:'lorem ipsum'
     }
   ];
-  displayField : string[] = ["text","currency"];
+  displayField : string[] = ["country","value","text","currency"];
   centerPos: number[] = [2.35, 48.86];
 
   countries: string[] = this.demoData.map(item => item.country);
@@ -77,7 +82,7 @@ export class VectorMapDemoComponent implements OnInit  {
     this.countryNameType = e.value
   }
   //Checkbox Button for display configuration
-  toggleVisibility(value,target) {
+  toggleVisibility(value) {
     this.checked = !value;
   }
   clickStatus(){
@@ -132,7 +137,7 @@ export class VectorMapDemoComponent implements OnInit  {
             });
           }
         });
-          /* this.resetData(); */
+          this.resetData(); 
       });
     //Configuration Width of Map
     this.width$
@@ -165,7 +170,7 @@ export class VectorMapDemoComponent implements OnInit  {
           this.demoData[i].value = valuesTemp[i];
         }
 
-        /* this.resetData(); */
+        this.resetData();
       });
 
     //Configiration Colorbar Title
