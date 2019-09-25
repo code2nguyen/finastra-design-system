@@ -30,7 +30,7 @@ export class VectorMapDemoComponent implements OnInit  {
     {
       country: 'USA',
       value: 300,
-      currency: 'USA',
+      currency: 'US Dollar',
       text:'lorem ipsum'
     }
   ];
