@@ -4,7 +4,9 @@ The vector map is for display Data in a map generate with Plotly Library and Ang
 ## Plotly Documentation
 
 [Chart Attribute Reference](https://plot.ly/javascript/reference/)
+
 [Event Handler in Plotly](https://plot.ly/javascript/plotlyjs-events/)
+
 [Choropleth Map Plotly](https://plot.ly/javascript/choropleth-maps/)
 
 ## Format Data
