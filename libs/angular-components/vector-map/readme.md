@@ -1,7 +1,14 @@
-#Description of Vector Map
-The vector map is for display Data in a map generate with Plotly Library.
+# Description of Vector Map
+The vector map is for display Data in a map generate with Plotly Library and Angular.
 
-##Format Data
+## Plotly Documentation
+
+[Chart Attribute Reference](https://plot.ly/javascript/reference/)
+[Event Handler in Plotly](https://plot.ly/javascript/plotlyjs-events/)
+[Choropleth Map Plotly](https://plot.ly/javascript/choropleth-maps/)
+
+## Format Data
+
 ```
  demoData: any[] = [
     {
@@ -17,10 +24,10 @@ The vector map is for display Data in a map generate with Plotly Library.
   ]
 ```
 >**country** and **value** is important for display data in the map 
->**country** is available in [ISO-3 format](https://www.iban.com/country-codes "link to the iso 3 codes countries") and **'country names' format **
+>**country** is available in [ISO-3 format](https://www.iban.com/country-codes "link to the iso 3 codes countries") and **country names format**
 
 
-##Input / Output
+## Input / Output
 
 **Input**
 
@@ -42,7 +49,7 @@ The vector map is for display Data in a map generate with Plotly Library.
 |colorbarTitle          | string                | Title of the colorbar                                                          |
 |colorbarColorMin       | A palette or string   | Color for minimum values                                                       |
 |colorbarColorMax       | A palette or string   | Color for maximum values                                                       |
-|displayField           | array[string]         | Filter Data as according to the table values                                   |
+|displayField           | Array[string]         | Filter Data as according to the table values                                   |
 |centerPos              | Array [number]        | Longitude and latitude determined according to continent for center of map     |
 |titleMap               | string                | Title of Map                                                                   |
 |countryNameType        | string                | Type of Country Name ( ISO or country names)                                   |
