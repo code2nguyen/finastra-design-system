@@ -2,7 +2,6 @@
   "extends": "../../tslint.json",
   "rules": {
     "directive-selector": [true, "attribute", "uxg", "camelCase"],
-    "component-selector": [true, "element", "uxg", "kebab-case"],
-    "resolveJsonModule": true
+    "component-selector": [true, "element", "uxg", "kebab-case"]
   }
 }

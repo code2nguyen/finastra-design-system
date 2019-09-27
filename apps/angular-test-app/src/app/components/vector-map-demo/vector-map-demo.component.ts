@@ -6,12 +6,11 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
   selector: 'ffdc-vector-map-demo',
   templateUrl: './vector-map-demo.template.html'
 })
-export class VectorMapDemoComponent implements OnInit  {
+export class VectorMapDemoComponent implements OnInit {
   demoData: any[] = [
     {
       country: 'France',
       value: 10,
-      'Market Value': 666,
       currency: 'EUR',
       text: 'hello world'
     },
@@ -19,55 +18,56 @@ export class VectorMapDemoComponent implements OnInit  {
       country: 'CHN',
       value: 25,
       currency: 'YEN',
-      text:'welcome'
+      text: 'welcome'
     },
     {
       country: 'Portugal',
-      value: 150,
+      values: 150,
       currency: 'EUR',
-      text:'lorem'
+      text: 'lorem'
     },
     {
       country: 'USA',
       value: 300,
       currency: 'US Dollar',
-      text:'lorem ipsum'
+      text: 'lorem ipsum'
     }
   ];
-  displayField : string[] = ["country","value","text","currency"];
+  displayField: string[] = ['country', 'value', 'text', 'currency'];
+  valueField: string[] = ['value', 'values'];
   centerPos: number[] = [2.35, 48.86];
 
   countries: string[] = this.demoData.map(item => item.country);
   countries$ = new Subject();
 
-  values: number[] = this.demoData.map(item => item.value);
+  values: number[] = this.demoData.map(item => item.value || item.values);
   values$ = new Subject();
 
-  colorbarTitle: string = 'Colorbar Title';
+  colorbarTitle = 'Colorbar Title';
   colorbarTitle$ = new Subject();
 
-  colorbarColorMin: string = '#9E75FF';
+  colorbarColorMin = '#9E75FF';
   colorbarColorMin$ = new Subject();
 
-  colorbarColorMax: string = '#302463';
+  colorbarColorMax = '#302463';
   colorbarColorMax$ = new Subject();
 
-  titleMap: string = 'TitleMap';
+  titleMap = 'TitleMap';
   titleMap$ = new Subject();
 
-  width: number = 1400;
-  width$= new Subject();
+  width = 1400;
+  width$ = new Subject();
 
-  height: number = 600;
+  height = 600;
   height$ = new Subject();
 
-  landColor: string = 'rgb(210, 210, 210)';
-  landColor$ = new Subject()
+  landColor = 'rgb(210, 210, 210)';
+  landColor$ = new Subject();
 
-  countryColor : String = '#a8a8a8';
+  countryColor = '#a8a8a8';
   countryColor$ = new Subject();
 
-  clickModeStatus : String = "select+event";
+  clickModeStatus = 'select+event';
 
   checked = false;
   showcountriesCheck = true;
@@ -75,46 +75,43 @@ export class VectorMapDemoComponent implements OnInit  {
   showborderMap = false;
   showcoastLines = true;
   clickMode = true;
-  countryNameType: string = "country names";
-  selectCountryNameType : any ;
-  
-  selectCountryType(e : any){
-    this.countryNameType = e.value
+  countryNameType = 'country names';
+  selectCountryNameType: any;
+
+  selectCountryType(e: any) {
+    this.countryNameType = e.value;
   }
   //Checkbox Button for display configuration
   toggleVisibility(value) {
     this.checked = !value;
   }
-  clickStatus(){
-    if(this.clickMode === true){
-      this.clickModeStatus = "event"
-    }else{
-      this.clickModeStatus = "select+event"
+  clickStatus() {
+    if (this.clickMode === true) {
+      this.clickModeStatus = 'event';
+    } else {
+      this.clickModeStatus = 'select+event';
     }
   }
-  
-  
-  
+
   ngOnInit() {
-    
     //Configuration Land Color
     this.landColor$
       .pipe(
         debounceTime(400),
         distinctUntilChanged()
       )
-      .subscribe((colorLand : string)=>{
+      .subscribe((colorLand: string) => {
         this.landColor = colorLand;
-      })
+      });
     //Configuration Country Boundaries Color
     this.countryColor$
-    .pipe(
-      debounceTime(400),
-      distinctUntilChanged()
-    )
-    .subscribe((countryColors : string)=>{
-      this.countryColor = countryColors;
-    })
+      .pipe(
+        debounceTime(400),
+        distinctUntilChanged()
+      )
+      .subscribe((countryColors: string) => {
+        this.countryColor = countryColors;
+      });
     //Configuration Countries
     this.countries$
       .pipe(
@@ -122,14 +119,10 @@ export class VectorMapDemoComponent implements OnInit  {
         distinctUntilChanged()
       )
       .subscribe((countries: any) => {
-        const countriesTemp = countries
-          .split(',')
-          .map(term => term);
+        const countriesTemp = countries.split(',').map(term => term);
 
         countriesTemp.forEach(country => {
-          const countryIndexInData = this.demoData.findIndex(
-            item => item.country === country
-          );
+          const countryIndexInData = this.demoData.findIndex(item => item.country === country);
 
           if (countryIndexInData < 0) {
             this.demoData.push({
@@ -137,26 +130,26 @@ export class VectorMapDemoComponent implements OnInit  {
             });
           }
         });
-          this.resetData(); 
+        this.resetData();
       });
     //Configuration Width of Map
     this.width$
-    .pipe(
-      debounceTime(400),
-      distinctUntilChanged()
+      .pipe(
+        debounceTime(400),
+        distinctUntilChanged()
       )
-      .subscribe((value:number)=>{
-        this.width=value;
-      })
-      //Configuration Height of Map
+      .subscribe((value: number) => {
+        this.width = value;
+      });
+    //Configuration Height of Map
     this.height$
-    .pipe(
-      debounceTime(400),
-      distinctUntilChanged()
+      .pipe(
+        debounceTime(400),
+        distinctUntilChanged()
       )
-      .subscribe((value:number)=>{
-        this.height=value;
-      })
+      .subscribe((value: number) => {
+        this.height = value;
+      });
     //Configuration Values
     this.values$
       .pipe(
@@ -164,7 +157,7 @@ export class VectorMapDemoComponent implements OnInit  {
         distinctUntilChanged()
       )
       .subscribe((value: string) => {
-        const valuesTemp = value.split(',').map(term => parseInt(term));
+        const valuesTemp = value.split(',').map(term => parseInt(term, 10));
 
         for (let i = 0; i < valuesTemp.length; i++) {
           this.demoData[i].value = valuesTemp[i];

@@ -13,9 +13,8 @@ export interface ResultGroup {
 }
 
 @Injectable({
-  providedIn:'root'
+  providedIn: 'root'
 })
-
 export class GlobalSearchService {
   private index: any;
   itemClicked = new ReplaySubject<Object>(1);
@@ -23,13 +22,12 @@ export class GlobalSearchService {
   initIndex(fields?: string[], ref?: string) {
     return new Promise((resolve, reject) => {
       if (!this.index) {
-        // import('elasticlunr/release/elasticlunr.min.js').then(module => {
-        //   this.index = module.default();
-        //   this.addFields(fields);
-        //   this.index.setRef(ref || 'id');
-
-        //   resolve();
-        // });
+        import('elasticlunr/release/elasticlunr.min.js').then(module => {
+          this.index = module.default();
+          this.addFields(fields);
+          this.index.setRef(ref || 'id');
+          resolve();
+        });
       } else {
         resolve();
       }
